@@ -6,12 +6,12 @@
 
 package com.q2ve.goranews.repository.network.retrofit.dataclasses
 
-import com.q2ve.goranews.repository.database.dataclassesInterfaces.ItemArticle
+import com.q2ve.goranews.repository.database.realm.dataclasses.RealmItemArticle
 
-data class RetrofitItemResponseArticles <T: ItemArticle?> (
+data class RetrofitItemResponseArticles (
 	val status: String?,
 	val totalResults: Int?,
-	val articles: List<T>?,
+	val articles: List<RealmItemArticle>?,
 	val code: String?,
 	val message: String?
 )

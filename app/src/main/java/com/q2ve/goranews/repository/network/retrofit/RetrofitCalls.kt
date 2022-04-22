@@ -6,10 +6,8 @@
 
 package com.q2ve.goranews.repository.network.retrofit
 
-import com.google.gson.Gson
-import com.google.gson.JsonElement
 import com.q2ve.goranews.repository.NetworkInterface
-import com.q2ve.goranews.repository.database.dataclassesInterfaces.ItemArticle
+import com.q2ve.goranews.repository.database.realm.dataclasses.RealmItemArticle
 import com.q2ve.goranews.repository.network.NetworkErrorType
 import com.q2ve.goranews.repository.network.apiRequestsParameters.NewsGettingParameters
 import com.q2ve.goranews.repository.network.retrofit.dataclasses.RetrofitItemResponseArticles
@@ -23,30 +21,23 @@ class RetrofitCalls: NetworkInterface {
 	
 	private class CallbackBuilder {
 		/**
-		 * "R" is a specific class that represents structure of the response body.
-		 * We can't pass specific class directly as the result of an ApiRequest function
-		 * because it may contains nested generic itself, and retrofit can't handle it.
-		 * Developers marked corresponding issue as "feature".
+		 * "T" is a specific class that represents structure of the response body.
 		 */
-		inline fun <reified R> buildCallback(
-			noinline onCallbackSuccess: ((R) -> Unit)?,
-			noinline onCallbackError: ((NetworkErrorType) -> Unit)?
-		): Callback<JsonElement> {
-			return object: Callback<JsonElement> {
+		fun <T> buildCallback(
+			onCallbackSuccess: ((Response<T>) -> Unit)?,
+			onCallbackError: ((NetworkErrorType) -> Unit)?
+		): Callback<T> {
+			return object: Callback<T> {
 				override fun onResponse(
-					call: Call<JsonElement>,
-					response: Response<JsonElement>
+					call: Call<T>,
+					response: Response<T>
 				) {
 					val errorType = RetrofitErrorChecker().checkResponse(response)
 					if (errorType != null) onCallbackError?.invoke(errorType)
-					else {
-						val body = response.body()
-						val serializedBody = Gson().fromJson(body?.asJsonObject, R::class.java)
-						onCallbackSuccess?.invoke(serializedBody)
-					}
+					else onCallbackSuccess?.invoke(response)
 				}
 				override fun onFailure(
-					call: Call<JsonElement>,
+					call: Call<T>,
 					t: Throwable
 				) {
 					val errorType = RetrofitErrorChecker().checkOnFailure(t)
@@ -56,19 +47,19 @@ class RetrofitCalls: NetworkInterface {
 		}
 	}
 	
-	override fun <T: ItemArticle?> getNews(
+	override fun getNews(
 		parameters: NewsGettingParameters,
-		onSuccess: ((List<T>?) -> Unit)?,
+		onSuccess: ((List<RealmItemArticle>) -> Unit)?,
 		onError: ((NetworkErrorType) -> Unit)?
 	) {
-		fun onCallbackSuccess(body: RetrofitItemResponseArticles<T>) {
-			val errorType = errorChecker.checkResponseArticles(body)
+		fun onCallbackSuccess(response: Response<RetrofitItemResponseArticles>) {
+			val errorType = errorChecker.checkResponseArticles(response.body())
 			if (errorType != null) onError?.invoke(errorType)
-			else onSuccess?.invoke(body.articles)
+			else onSuccess?.invoke(response.body()?.articles ?: emptyList())
 		}
 		
 		val callback = CallbackBuilder().buildCallback(::onCallbackSuccess, onError)
-		val call = caller.getRequest().getNews<T>(
+		val call = caller.getRequest().getNews(
 			apiKey = parameters.apiKey,
 			language = parameters.language,
 			country = parameters.country,

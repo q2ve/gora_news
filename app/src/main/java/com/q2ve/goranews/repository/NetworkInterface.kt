@@ -6,14 +6,14 @@
 
 package com.q2ve.goranews.repository
 
-import com.q2ve.goranews.repository.database.dataclassesInterfaces.ItemArticle
+import com.q2ve.goranews.repository.database.realm.dataclasses.RealmItemArticle
 import com.q2ve.goranews.repository.network.NetworkErrorType
 import com.q2ve.goranews.repository.network.apiRequestsParameters.NewsGettingParameters
 
 interface NetworkInterface {
-	fun <T: ItemArticle?> getNews(
+	fun getNews(
 		parameters: NewsGettingParameters,
-		onSuccess: ((List<T>?) -> Unit)?,
+		onSuccess: ((List<RealmItemArticle>) -> Unit)?,
 		onError: ((NetworkErrorType) -> Unit)?
 	)
 }

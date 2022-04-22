@@ -6,8 +6,7 @@
 
 package com.q2ve.goranews.repository.network.retrofit
 
-import com.google.gson.JsonElement
-import com.q2ve.goranews.repository.database.dataclassesInterfaces.ItemArticle
+import com.q2ve.goranews.repository.network.retrofit.dataclasses.RetrofitItemResponseArticles
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -15,7 +14,7 @@ import retrofit2.http.Query
 
 interface RetrofitApiRequests {
 	@GET("top-headlines?")
-	fun <T: ItemArticle?> getNews (
+	fun getNews (
 		@Header("X-Api-Key") apiKey: String,
 		@Query("language") language: String,
 		@Query("country") country: String,
@@ -24,5 +23,5 @@ interface RetrofitApiRequests {
 		@Query("sortBy") sortBy: String,
 		@Query("pageSize") pageSize: Int,
 		@Query("page") page: Int,
-	): Call<JsonElement>
+	): Call<RetrofitItemResponseArticles>
 }

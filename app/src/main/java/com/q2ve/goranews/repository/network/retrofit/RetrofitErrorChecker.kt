@@ -6,7 +6,6 @@
 
 package com.q2ve.goranews.repository.network.retrofit
 
-import com.q2ve.goranews.repository.database.dataclassesInterfaces.ItemArticle
 import com.q2ve.goranews.repository.network.NetworkErrorType
 import com.q2ve.goranews.repository.network.retrofit.dataclasses.RetrofitItemResponseArticles
 import retrofit2.Response
@@ -32,7 +31,7 @@ class RetrofitErrorChecker {
 	 */
 	fun checkOnFailure(throwable: Throwable): NetworkErrorType {
 		return when (throwable.javaClass.name.toString()) {
-			//Unnecessary for now, but will become useful when extending the project.
+			//Unnecessary for now, but will become useful if extending the project.
 			"java.net.SocketTimeoutException" -> NetworkErrorType.NoConnection
 			"java.net.UnknownHostException" -> NetworkErrorType.NoConnection
 			else -> NetworkErrorType.NoConnection
@@ -43,14 +42,14 @@ class RetrofitErrorChecker {
 	 * Checks body's and articles' presence.
 	 * Returns NetworkErrorType or null if there are no errors.
 	 */
-	fun <T: ItemArticle?> checkResponseArticles(
-		body: RetrofitItemResponseArticles<T>
+	fun checkResponseArticles(
+		response: RetrofitItemResponseArticles?
 	): NetworkErrorType? {
 		return when {
-			(body.articles == null) -> NetworkErrorType.UnknownServerError
-			//Unnecessary, this parameters are not used in the app for now.
-			//(body.totalResults == null) -> NetworkErrorType.UnknownServerError
-			//(body.status == null) -> NetworkErrorType.UnknownServerError
+			(response?.articles == null) -> NetworkErrorType.UnknownServerError
+			//This parameters are not used in the app for now.
+			//(response.totalResults == null) -> NetworkErrorType.UnknownServerError
+			//(response.status == null) -> NetworkErrorType.UnknownServerError
 			else -> null
 		}
 	}
