@@ -6,10 +6,14 @@
 
 package com.q2ve.goranews.repository.network
 
-enum class NetworkErrorType {
-	InvalidApiKey,
-	UnknownServerError,
-	BadRequest,
-	Throttling,
-	NoConnection
+import com.q2ve.goranews.R
+
+enum class NetworkErrorType(private val defaultMessageResource: Int) {
+	InvalidApiKey(R.string.an_error_occurred),
+	UnknownServerError(R.string.server_error),
+	BadRequest(R.string.an_error_occurred),
+	Throttling(R.string.an_error_occurred),
+	NoConnection(R.string.no_server_connection);
+	
+	fun getDefaultMessage(): Int = this.defaultMessageResource
 }

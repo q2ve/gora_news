@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generated -->
+
+<resources>
+	<string name="app_name">GORA Новости</string>
+	<string name="news">Новости</string>
+	<string name="downloading_news">Загружаем новости…</string>
+	<string name="no_server_connection">Нет подключения к серверу</string>
+	<string name="server_error">Ошибка сервера!</string>
+	<string name="an_error_occurred">Произошла ошибка</string>
+</resources>
