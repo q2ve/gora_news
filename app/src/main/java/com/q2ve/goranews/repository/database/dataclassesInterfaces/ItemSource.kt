@@ -6,7 +6,7 @@
 
 package com.q2ve.goranews.repository.database.dataclassesInterfaces
 
-interface ItemSourceInterface {
+interface ItemSource {
 	val id: String?
 	val name: String?
 }

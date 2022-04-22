@@ -6,7 +6,7 @@
 
 package com.q2ve.goranews.repository.network.retrofit
 
-import com.q2ve.goranews.repository.database.dataclassesInterfaces.ItemArticleInterface
+import com.q2ve.goranews.repository.database.dataclassesInterfaces.ItemArticle
 import com.q2ve.goranews.repository.network.NetworkErrorType
 import com.q2ve.goranews.repository.network.retrofit.dataclasses.RetrofitItemResponseArticles
 import retrofit2.Response
@@ -43,7 +43,7 @@ class RetrofitErrorChecker {
 	 * Checks body's and articles' presence.
 	 * Returns NetworkErrorType or null if there are no errors.
 	 */
-	fun <T: ItemArticleInterface?> checkResponseArticles(
+	fun <T: ItemArticle?> checkResponseArticles(
 		response: Response<RetrofitItemResponseArticles<T>>
 	): NetworkErrorType? {
 		val body = response.body()

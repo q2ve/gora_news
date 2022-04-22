@@ -6,7 +6,7 @@
 
 package com.q2ve.goranews.repository.database.realm.dataclasses
 
-import com.q2ve.goranews.repository.database.dataclassesInterfaces.ItemArticleInterface
+import com.q2ve.goranews.repository.database.dataclassesInterfaces.ItemArticle
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
@@ -20,4 +20,4 @@ open class RealmItemArticle(
 	override var urlToImage: String? = null,
 	override var publishedAt: String? = null,
 	override var content: String? = null
-): RealmObject(), ItemArticleInterface
+): RealmObject(), ItemArticle

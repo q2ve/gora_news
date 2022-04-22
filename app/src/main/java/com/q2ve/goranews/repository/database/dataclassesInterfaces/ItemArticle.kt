@@ -6,8 +6,8 @@
 
 package com.q2ve.goranews.repository.database.dataclassesInterfaces
 
-interface ItemArticleInterface {
-	val source: ItemSourceInterface?
+interface ItemArticle {
+	val source: ItemSource?
 	val author: String?
 	val title: String?
 	val description: String?
