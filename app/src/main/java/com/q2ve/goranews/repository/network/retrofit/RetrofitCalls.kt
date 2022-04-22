@@ -6,6 +6,8 @@
 
 package com.q2ve.goranews.repository.network.retrofit
 
+import com.google.gson.Gson
+import com.google.gson.JsonElement
 import com.q2ve.goranews.repository.NetworkInterface
 import com.q2ve.goranews.repository.database.dataclassesInterfaces.ItemArticle
 import com.q2ve.goranews.repository.network.NetworkErrorType
@@ -20,21 +22,31 @@ class RetrofitCalls: NetworkInterface {
 	private val errorChecker = RetrofitErrorChecker()
 	
 	private class CallbackBuilder {
-		fun <T> buildCallback(
-			onCallbackSuccess: ((Response<T>) -> Unit)?,
-			onCallbackError: ((NetworkErrorType) -> Unit)?
-		): Callback<T> {
-			return object: Callback<T> {
+		/**
+		 * "R" is a specific class that represents structure of the response body.
+		 * We can't pass specific class directly as the result of an ApiRequest function
+		 * because it may contains nested generic itself, and retrofit can't handle it.
+		 * Developers marked corresponding issue as "feature".
+		 */
+		inline fun <reified R> buildCallback(
+			noinline onCallbackSuccess: ((R) -> Unit)?,
+			noinline onCallbackError: ((NetworkErrorType) -> Unit)?
+		): Callback<JsonElement> {
+			return object: Callback<JsonElement> {
 				override fun onResponse(
-					call: Call<T>,
-					response: Response<T>
+					call: Call<JsonElement>,
+					response: Response<JsonElement>
 				) {
 					val errorType = RetrofitErrorChecker().checkResponse(response)
 					if (errorType != null) onCallbackError?.invoke(errorType)
-					else onCallbackSuccess?.invoke(response)
+					else {
+						val body = response.body()
+						val serializedBody = Gson().fromJson(body?.asJsonObject, R::class.java)
+						onCallbackSuccess?.invoke(serializedBody)
+					}
 				}
 				override fun onFailure(
-					call: Call<T>,
+					call: Call<JsonElement>,
 					t: Throwable
 				) {
 					val errorType = RetrofitErrorChecker().checkOnFailure(t)
@@ -49,10 +61,10 @@ class RetrofitCalls: NetworkInterface {
 		onSuccess: ((List<T>?) -> Unit)?,
 		onError: ((NetworkErrorType) -> Unit)?
 	) {
-		fun onCallbackSuccess(response: Response<RetrofitItemResponseArticles<T>>) {
-			val errorType = errorChecker.checkResponseArticles(response)
+		fun onCallbackSuccess(body: RetrofitItemResponseArticles<T>) {
+			val errorType = errorChecker.checkResponseArticles(body)
 			if (errorType != null) onError?.invoke(errorType)
-			else onSuccess?.invoke(response.body()?.articles)
+			else onSuccess?.invoke(body.articles)
 		}
 		
 		val callback = CallbackBuilder().buildCallback(::onCallbackSuccess, onError)

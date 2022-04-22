@@ -16,7 +16,7 @@ class RetrofitErrorChecker {
 	 * Checks http codes.
 	 * Returns NetworkErrorType or null if there are no errors.
 	 */
-	fun <T> checkResponse(response: Response<T>): NetworkErrorType? {
+	fun checkResponse(response: Response<*>): NetworkErrorType? {
 		return when {
 			(response.code() == 500) -> NetworkErrorType.UnknownServerError
 			(response.code() == 400) -> NetworkErrorType.BadRequest
@@ -44,12 +44,13 @@ class RetrofitErrorChecker {
 	 * Returns NetworkErrorType or null if there are no errors.
 	 */
 	fun <T: ItemArticle?> checkResponseArticles(
-		response: Response<RetrofitItemResponseArticles<T>>
+		body: RetrofitItemResponseArticles<T>
 	): NetworkErrorType? {
-		val body = response.body()
 		return when {
-			(body == null) -> NetworkErrorType.UnknownServerError
 			(body.articles == null) -> NetworkErrorType.UnknownServerError
+			//Unnecessary, this parameters are not used in the app for now.
+			//(body.totalResults == null) -> NetworkErrorType.UnknownServerError
+			//(body.status == null) -> NetworkErrorType.UnknownServerError
 			else -> null
 		}
 	}

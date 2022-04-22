@@ -8,7 +8,7 @@ package com.q2ve.goranews.repository.network.retrofit.dataclasses
 
 import com.q2ve.goranews.repository.database.dataclassesInterfaces.ItemArticle
 
-data class RetrofitItemResponseArticles <T: ItemArticle?>(
+data class RetrofitItemResponseArticles <T: ItemArticle?> (
 	val status: String?,
 	val totalResults: Int?,
 	val articles: List<T>?,

@@ -6,8 +6,8 @@
 
 package com.q2ve.goranews.repository.network.retrofit
 
+import com.google.gson.JsonElement
 import com.q2ve.goranews.repository.database.dataclassesInterfaces.ItemArticle
-import com.q2ve.goranews.repository.network.retrofit.dataclasses.RetrofitItemResponseArticles
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -24,5 +24,5 @@ interface RetrofitApiRequests {
 		@Query("sortBy") sortBy: String,
 		@Query("pageSize") pageSize: Int,
 		@Query("page") page: Int,
-	): Call<RetrofitItemResponseArticles<T>>
+	): Call<JsonElement>
 }
