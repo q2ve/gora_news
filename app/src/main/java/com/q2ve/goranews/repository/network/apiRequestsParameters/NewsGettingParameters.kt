@@ -6,7 +6,7 @@
 
 package com.q2ve.goranews.repository.network.apiRequestsParameters
 
-data class GetNewsParameters (
+data class NewsGettingParameters (
 	val apiKey: String,
 	val category: String,
 	val pageSize: Int,

@@ -9,7 +9,7 @@ package com.q2ve.goranews.repository.network.retrofit
 import com.q2ve.goranews.repository.NetworkInterface
 import com.q2ve.goranews.repository.database.dataclassesInterfaces.ItemArticle
 import com.q2ve.goranews.repository.network.NetworkErrorType
-import com.q2ve.goranews.repository.network.apiRequestsParameters.GetNewsParameters
+import com.q2ve.goranews.repository.network.apiRequestsParameters.NewsGettingParameters
 import com.q2ve.goranews.repository.network.retrofit.dataclasses.RetrofitItemResponseArticles
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,7 +45,7 @@ class RetrofitCalls: NetworkInterface {
 	}
 	
 	override fun <T: ItemArticle?> getNews(
-		parameters: GetNewsParameters,
+		parameters: NewsGettingParameters,
 		onSuccess: ((List<T>?) -> Unit)?,
 		onError: ((NetworkErrorType) -> Unit)?
 	) {
