@@ -58,6 +58,8 @@ dependencies {
 		'/libs/android-adapters/4.0.0/1e638ee14d888201bd5f27b351e600a1ad7d054/android-adapters-4.0.0-sources.jar',
 	)
 	implementation 'com.squareup.picasso:picasso:2.8'
+	implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.20'
+	implementation 'io.reactivex.rxjava2:rxjava:2.1.8'
 	
 	testImplementation 'junit:junit:4.13.2'
 	androidTestImplementation 'androidx.test.ext:junit:1.1.3'
