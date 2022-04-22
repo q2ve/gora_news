@@ -16,8 +16,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RetrofitCalls: NetworkInterface {
-	private val retrofitCaller = RetrofitCaller()
-	private val retrofitErrorResolver = RetrofitErrorResolver()
+	private val caller = RetrofitCaller()
+	private val errorChecker = RetrofitErrorChecker()
 	
 	class CallbackBuilder {
 		fun <T> buildCallback(
@@ -29,7 +29,7 @@ class RetrofitCalls: NetworkInterface {
 					call: Call<T>,
 					response: Response<T>
 				) {
-					val errorType = RetrofitErrorResolver().checkResponse(response)
+					val errorType = RetrofitErrorChecker().checkResponse(response)
 					if (errorType != null) onCallbackError?.invoke(errorType)
 					else onCallbackSuccess?.invoke(response)
 				}
@@ -37,7 +37,7 @@ class RetrofitCalls: NetworkInterface {
 					call: Call<T>,
 					t: Throwable
 				) {
-					val errorType = RetrofitErrorResolver().checkOnFailure(t)
+					val errorType = RetrofitErrorChecker().checkOnFailure(t)
 					onCallbackError?.invoke(errorType)
 				}
 			}
@@ -50,13 +50,13 @@ class RetrofitCalls: NetworkInterface {
 		onError: ((NetworkErrorType) -> Unit)?
 	) {
 		fun onCallbackSuccess(response: Response<RetrofitItemResponseArticles<T>>) {
-			val errorType = retrofitErrorResolver.checkResponseArticles(response)
+			val errorType = errorChecker.checkResponseArticles(response)
 			if (errorType != null) onError?.invoke(errorType)
 			else onSuccess?.invoke(response.body()?.articles)
 		}
 		
 		val callback = CallbackBuilder().buildCallback(::onCallbackSuccess, onError)
-		val call = retrofitCaller.getRequest().getNews<T>(
+		val call = caller.getRequest().getNews<T>(
 			apiKey = parameters.apiKey,
 			language = parameters.language,
 			country = parameters.country,
@@ -66,6 +66,6 @@ class RetrofitCalls: NetworkInterface {
 			pageSize = parameters.pageSize,
 			page = parameters.page
 		)
-		retrofitCaller.enqueueCall(call, callback)
+		caller.enqueueCall(call, callback)
 	}
 }

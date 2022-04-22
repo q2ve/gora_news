@@ -11,7 +11,7 @@ import com.q2ve.goranews.repository.network.NetworkErrorType
 import com.q2ve.goranews.repository.network.retrofit.dataclasses.RetrofitItemResponseArticles
 import retrofit2.Response
 
-class RetrofitErrorResolver {
+class RetrofitErrorChecker {
 	/**
 	 * Checks http codes.
 	 * Returns NetworkErrorType or null if there are no errors.
