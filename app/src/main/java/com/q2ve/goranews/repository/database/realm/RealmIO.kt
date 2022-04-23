@@ -249,7 +249,8 @@ class RealmIO {
 						it.returnType.classifier.toString() == T::class.java.toString()
 					}
 					if (field is KProperty) {
-						sortedList += field.getter.call(indexItem) as T
+						val item = field.getter.call(indexItem) as? T
+						if (item != null) sortedList += item
 					}
 				}
 				/**

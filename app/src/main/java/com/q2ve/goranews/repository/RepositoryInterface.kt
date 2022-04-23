@@ -25,9 +25,9 @@ interface RepositoryInterface {
 	 * If it doesn't find them there - will call "onError".
 	 */
 	fun getNews(
+		category: NewsCategories,
 		onSuccess: (ArticlesSet) -> Unit,
 		onError: (NetworkErrorType) -> Unit,
-		category: NewsCategories,
 		language: NewsLanguages = NewsLanguages.All,
 		country: String = "", //It's too boring to create enum for these 54 countries. Especially when we don't use them
 		query: String = "",

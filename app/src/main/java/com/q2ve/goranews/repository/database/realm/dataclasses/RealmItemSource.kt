@@ -13,4 +13,6 @@ open class RealmItemSource(
 	@PrimaryKey
 	var id: String? = null,
 	var name: String? = null
-): RealmObject()
+): RealmObject(), ValidationInterface {
+	override fun checkValidity() = if (id == null || id == "") null else this
+}
