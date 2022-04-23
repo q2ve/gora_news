@@ -6,8 +6,10 @@
 
 package com.q2ve.goranews.repository.network.apiRequestsParameters
 
-enum class NewsLanguages(private val key: String? = null) {
-	All(""), Ar, De, En, Es, Fr, He, It, Nl, No, Pt, Ru, Sv, Ud, Zh;
+enum class NewsSorting(private val key: String? = null) {
+	Relevancy,
+	Popularity,
+	PublishedAt("publishedAt");
 	
 	fun getKey(): String = this.key ?: this.name.lowercase()
 }

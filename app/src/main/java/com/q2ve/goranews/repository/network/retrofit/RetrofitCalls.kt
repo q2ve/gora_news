@@ -65,6 +65,7 @@ class RetrofitCalls: NetworkInterface {
 			country = parameters.country,
 			category = parameters.category,
 			q = parameters.query,
+			searchIn = parameters.searchScope,
 			sortBy = parameters.sortOrder,
 			pageSize = parameters.pageSize,
 			page = parameters.page

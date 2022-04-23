@@ -20,6 +20,7 @@ interface RetrofitApiRequests {
 		@Query("country") country: String,
 		@Query("category") category: String,
 		@Query("q") q: String,
+		@Query("searchIn") searchIn: String,
 		@Query("sortBy") sortBy: String,
 		@Query("pageSize") pageSize: Int,
 		@Query("page") page: Int,

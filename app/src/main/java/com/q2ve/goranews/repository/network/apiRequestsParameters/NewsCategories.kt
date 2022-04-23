@@ -17,7 +17,7 @@ enum class NewsCategories(private val nameResource: Int) {
 	Technology(R.string.technology),
 	Business(R.string.business);
 	
-	fun getCategoryId(): String = this.name.lowercase()
+	fun getCategoryKey(): String = this.name.lowercase()
 	
 	fun getCategoryNameResource(): Int = this.nameResource
 }

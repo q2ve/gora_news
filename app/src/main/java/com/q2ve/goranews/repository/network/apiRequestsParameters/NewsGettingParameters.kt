@@ -12,7 +12,8 @@ data class NewsGettingParameters (
 	val pageSize: Int,
 	val page: Int = 1,
 	val query: String = "",
-	val sortOrder: String = "publishedAt",
+	val searchScope: String = "",
+	val sortOrder: String = "",
 	val language: String = "",
 	val country: String = ""
 )
