@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generated -->
 
+<!-- Generated -->
 <resources>
 	<string name="app_name">GORA Новости</string>
 	<string name="news">Новости</string>
@@ -8,4 +8,11 @@
 	<string name="no_server_connection">Нет подключения к серверу</string>
 	<string name="server_error">Ошибка сервера!</string>
 	<string name="an_error_occurred">Произошла ошибка</string>
+	<string name="science">Наука</string>
+	<string name="entertainment">Развлечение</string>
+	<string name="sports">Спорт</string>
+	<string name="general">Общие новости</string>
+	<string name="health">Здоровье</string>
+	<string name="technology">Технологии</string>
+	<string name="business">Бизнес</string>
 </resources>

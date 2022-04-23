@@ -6,6 +6,13 @@
 	
 	<!-- Titles -->
 	<string name="news">News</string>
+	<string name="science">Science</string>
+	<string name="entertainment">Entertainment</string>
+	<string name="sports">Sports</string>
+	<string name="general">General</string>
+	<string name="health">Health</string>
+	<string name="technology">Technology</string>
+	<string name="business">Business</string>
 	
 	<!-- Status messages -->
 	<string name="downloading_news">Downloading news…</string>

@@ -6,14 +6,18 @@
 
 package com.q2ve.goranews.repository.network.apiRequestsParameters
 
-enum class NewsCategories {
-	Science,
-	Entertainment,
-	Sports,
-	General,
-	Health,
-	Technology,
-	Business;
+import com.q2ve.goranews.R
+
+enum class NewsCategories(private val nameResource: Int) {
+	Science(R.string.science),
+	Entertainment(R.string.entertainment),
+	Sports(R.string.sports),
+	General(R.string.general),
+	Health(R.string.health),
+	Technology(R.string.technology),
+	Business(R.string.business);
 	
-	fun getCategoryName(): String = this.name.lowercase()
+	fun getCategoryId(): String = this.name.lowercase()
+	
+	fun getCategoryNameResource(): Int = this.nameResource
 }
