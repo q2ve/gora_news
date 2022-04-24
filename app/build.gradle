@@ -58,7 +58,7 @@ dependencies {
 		'/libs/android-adapters/4.0.0/788e279a0ae20744141f3988d163b67ab8f40cb2/android-adapters-4.0.0-javadoc.jar',
 		'/libs/android-adapters/4.0.0/1e638ee14d888201bd5f27b351e600a1ad7d054/android-adapters-4.0.0-sources.jar',
 	)
-	implementation 'com.squareup.picasso:picasso:2.8'
+	//implementation 'com.squareup.picasso:picasso:2.8'
 	implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.20'
 	implementation 'io.reactivex.rxjava2:rxjava:2.1.8'
 	//implementation 'jp.wasabeef:picasso-transformations:2.4.0'
