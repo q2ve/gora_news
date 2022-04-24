@@ -71,7 +71,7 @@ class FeedViewAdapter(
 				val context = holder.itemView.context
 				Glide.with(context)
 					.load(article.urlToImage)
-					.transition(DrawableTransitionOptions.withCrossFade())
+					.transition(DrawableTransitionOptions.withCrossFade(150))
 					.apply(buildGlideConfig(context))
 					.into(holder.cover)
 			}
@@ -103,7 +103,7 @@ class FeedViewAdapter(
 				Log.e("getPreloadRequestBuilder", item)
 				return Glide.with(context)
 					.load(item)
-					.transition(DrawableTransitionOptions.withCrossFade())
+					.transition(DrawableTransitionOptions.withCrossFade(150))
 					.apply(buildGlideConfig(context))
 			}
 		}
