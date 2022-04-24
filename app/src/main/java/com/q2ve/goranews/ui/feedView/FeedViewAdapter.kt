@@ -11,11 +11,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.q2ve.goranews.R
 import com.q2ve.goranews.databinding.ViewArticleItemBinding
 import com.q2ve.goranews.helpers.ButtonAnimator
 import com.q2ve.goranews.repository.database.realm.dataclasses.RealmItemArticle
-import com.squareup.picasso.Picasso
 
 
 class FeedViewAdapter(
@@ -57,16 +58,25 @@ class FeedViewAdapter(
 			if (!dummed) {
 				ButtonAnimator(holder.itemView).animateWeakPressing()
 				holder.itemView.setOnClickListener { onItemClicked?.invoke(article) }
+				Glide.with(holder.itemView.context)
+					.load(article.urlToImage)
+					.transition(DrawableTransitionOptions.withCrossFade())
+					.placeholder(R.drawable.pc_no_image_stub)
+					.error(R.drawable.pc_broken_image_stub)
+					.fallback(R.drawable.pc_broken_image_stub)
+					.fitCenter()
+					.centerCrop()
+					.into(holder.cover)
 			}
 			
 			//The "fit" and "centerCrop" are necessary to good performance.
-			Picasso.get()
-				.load(article.urlToImage)
-				//.networkPolicy(NetworkPolicy.OFFLINE, NetworkPolicy.NO_CACHE)
-				.fit()
-				.centerCrop()
-				.placeholder(R.drawable.pc_no_image_stub)
-				.into(holder.cover)
+//			Picasso.get()
+//				.load(article.urlToImage)
+//				//.networkPolicy(NetworkPolicy.OFFLINE, NetworkPolicy.NO_CACHE)
+//				.fit()
+//				.centerCrop()
+//				.placeholder(R.drawable.pc_no_image_stub)
+//				.into(holder.cover)
 		}
 	}
 	

@@ -21,7 +21,7 @@ open class RealmItemArticle(
 	var content: String? = null
 ): RealmObject(), ValidationInterface {
 	override fun checkValidity(): RealmItemArticle? {
-		val checklist = mutableListOf(url, title, /*description, urlToImage*/)
+		val checklist = mutableListOf(url, title, urlToImage /*description, urlToImage*/)
 		if (source?.checkValidity() == null) source = null
 		return if (checklist.contains(null) || checklist.contains("")) null else this
 	}

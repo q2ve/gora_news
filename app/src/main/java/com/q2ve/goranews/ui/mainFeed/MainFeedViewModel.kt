@@ -4,13 +4,18 @@
  * qwq2eq@gmail.com
  */
 
-package com.q2ve.goranews.ui
+package com.q2ve.goranews.ui.mainFeed
 
 import androidx.lifecycle.ViewModel
 import com.q2ve.goranews.helpers.Observable
+import com.q2ve.goranews.ui.FeedLoadStatus
 
-class FeedViewModel: ViewModel(), FeedViewModelInterface {
+class MainFeedViewModel: ViewModel(), MainFeedViewModelInterface {
 	override var loadStatus: Observable<FeedLoadStatus>? = null
+	
+	override fun onCreate() {
+		//TODO("Not yet implemented")
+	}
 	
 	override fun onCreateView() {
 		//TODO("Not yet implemented")

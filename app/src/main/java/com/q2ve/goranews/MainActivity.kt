@@ -11,18 +11,29 @@ import androidx.appcompat.app.AppCompatActivity
 import com.q2ve.goranews.databinding.ActivityMainBinding
 import com.q2ve.goranews.helpers.navigator.Navigator
 import com.q2ve.goranews.helpers.navigator.NavigatorAnimation
-import com.q2ve.goranews.ui.FeedFragment
+import com.q2ve.goranews.ui.mainFeed.MainFeedFragment
 import io.realm.Realm
 
 class MainActivity: AppCompatActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		val binding = ActivityMainBinding.inflate(layoutInflater)
-		setContentView(binding.root)
+		setContentView(ActivityMainBinding.inflate(layoutInflater).root)
+		
+		//Realm initialization
 		Realm.init(this)
+		
+//		//Setting limit of picasso cache size
+//		val picasso = Picasso.Builder(this)
+//			.memoryCache(LruCache(160000000)) //160MB
+//			.build()
+//		if (savedInstanceState == null) Picasso.setSingletonInstance(picasso)
+		
+		//Navigator initialization
 		Navigator.configure(this.supportFragmentManager)
+		
+		//Placing main feed
 		Navigator.replaceFragment(
-			FeedFragment(),
+			MainFeedFragment(),
 			R.id.activity_main_frame,
 			NavigatorAnimation.FadingWithoutScaling
 		)
