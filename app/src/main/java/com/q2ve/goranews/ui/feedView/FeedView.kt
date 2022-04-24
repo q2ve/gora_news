@@ -19,6 +19,7 @@ import com.q2ve.goranews.repository.RepositoryInterface
 import com.q2ve.goranews.repository.network.apiRequestsParameters.NewsCategories
 import com.q2ve.goranews.ui.FeedLoadStatus
 
+
 class FeedView{
 	var viewModel: FeedViewModelInterface? = null
 	
@@ -37,6 +38,12 @@ class FeedView{
 		val adapter = FeedViewAdapter({ viewModel.onArticleClicked(it, context) })
 		recycler.adapter = adapter
 		recycler.setHasFixedSize(true)
+		//recycler.setItemViewCacheSize(4)
+		
+		val preloader = adapter.buildPreloader(context, 18)
+		recycler.addOnScrollListener(preloader)
+		
+		//Dummy listener is necessary to restrict any interaction with recycler.
 		val dummyOnTouchListener = object: RecyclerView.OnItemTouchListener {
 			override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent) = true
 			override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) = Unit
@@ -66,7 +73,6 @@ class FeedView{
 						.start()
 				}
 				.start()
-			
 		})
 		
 		viewModel.loadNews()
