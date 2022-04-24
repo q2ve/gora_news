@@ -22,12 +22,6 @@ class MainActivity: AppCompatActivity() {
 		//Realm initialization
 		Realm.init(this)
 		
-//		//Setting limit of picasso cache size
-//		val picasso = Picasso.Builder(this)
-//			.memoryCache(LruCache(160000000)) //160MB
-//			.build()
-//		if (savedInstanceState == null) Picasso.setSingletonInstance(picasso)
-		
 		//Navigator initialization
 		Navigator.configure(this.supportFragmentManager)
 		

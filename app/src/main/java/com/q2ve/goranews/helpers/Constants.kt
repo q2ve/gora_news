@@ -12,7 +12,8 @@ object Constants {
 	const val serverUrlApi = "https://newsapi.org/v2/"
 	//Left API keys here for the clarity. Otherwise, i would put it in the gradle files.
 	//const val serverApiKey = "ac0793eb091f4bde9622dae5dfad2202" //MyOwn
-	const val serverApiKey = "5b24feab76bd41d4a22d2229c7fe7b0d" //TempMail
+	//const val serverApiKey = "5b24feab76bd41d4a22d2229c7fe7b0d" //TempMail. Only 100 uses per day
+	const val serverApiKey = "244c9da99c794df882d494f9b8fe1007" //TempMail. Again
 	const val enableCertificatePining = false
 	const val serverCertFingerprint = "sha256/..."
 	const val connectionTimeout: Long = 8

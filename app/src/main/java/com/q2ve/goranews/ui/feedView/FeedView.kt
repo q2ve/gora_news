@@ -44,7 +44,8 @@ class FeedView{
 		}
 		recycler.addOnItemTouchListener(dummyOnTouchListener)
 		
-		viewModel.articles?.subscribe({
+		viewModel.articles?.subscribe({ articles ->
+			//articles.forEach { Glide.with(context).load(it.urlToImage).preload() } //Async preloading
 			val defaultAlpha = recycler.alpha
 			val duration = 400L
 			
@@ -53,7 +54,7 @@ class FeedView{
 				.setInterpolator(DecelerateInterpolator())
 				.setDuration(duration)
 				.withEndAction {
-					adapter.updateData(it)
+					adapter.updateData(articles)
 					binding.feedShimmer.hideShimmer()
 					recycler.removeOnItemTouchListener(dummyOnTouchListener)
 					ViewCompat.animate(recycler)

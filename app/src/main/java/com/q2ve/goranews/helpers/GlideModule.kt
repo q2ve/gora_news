@@ -15,9 +15,10 @@ import com.bumptech.glide.module.AppGlideModule
 
 @GlideModule
 class GlideModule: AppGlideModule() {
+	//Setting limit of glide in-memory cache size
 	override fun applyOptions(context: Context, builder: GlideBuilder) {
 		super.applyOptions(context, builder)
-		val memoryCacheSizeBytes = 1024 * 1024 * 300 // 300MB
+		val memoryCacheSizeBytes = 1024 * 1024 * 360 // 360MB
 		builder.setMemoryCache(LruResourceCache(memoryCacheSizeBytes.toLong()))
 	}
 }

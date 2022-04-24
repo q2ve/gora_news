@@ -58,25 +58,16 @@ class FeedViewAdapter(
 			if (!dummed) {
 				ButtonAnimator(holder.itemView).animateWeakPressing()
 				holder.itemView.setOnClickListener { onItemClicked?.invoke(article) }
+				
 				Glide.with(holder.itemView.context)
 					.load(article.urlToImage)
 					.transition(DrawableTransitionOptions.withCrossFade())
 					.placeholder(R.drawable.pc_no_image_stub)
 					.error(R.drawable.pc_broken_image_stub)
-					.fallback(R.drawable.pc_broken_image_stub)
-					.fitCenter()
+					.fitCenter() //The "fit" and "centerCrop" are necessary to good performance.
 					.centerCrop()
 					.into(holder.cover)
 			}
-			
-			//The "fit" and "centerCrop" are necessary to good performance.
-//			Picasso.get()
-//				.load(article.urlToImage)
-//				//.networkPolicy(NetworkPolicy.OFFLINE, NetworkPolicy.NO_CACHE)
-//				.fit()
-//				.centerCrop()
-//				.placeholder(R.drawable.pc_no_image_stub)
-//				.into(holder.cover)
 		}
 	}
 	

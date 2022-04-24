@@ -41,8 +41,6 @@ class FeedViewModel(
 	private fun onNewsLoaded(articlesSet: ArticlesSet) {
 		loadStatus?.value = if (articlesSet.networkErrorType == null) FeedLoadStatus.Loaded
 							else FeedLoadStatus.LoadedOffline
-		//articlesSet.articles.forEach { Picasso.get().load(it.urlToImage).fetch() } //Async preloading
-		//articlesSet.articles.forEach { Glide.with(context).load(it.urlToImage).preload() } //Async preloading
 		articles?.value = articlesSet.articles
 	}
 	
