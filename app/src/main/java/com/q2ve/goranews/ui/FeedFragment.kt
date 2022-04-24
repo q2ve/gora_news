@@ -18,13 +18,14 @@ import com.q2ve.goranews.repository.network.apiRequestsParameters.NewsCategories
 import com.q2ve.goranews.ui.feedView.FeedView
 
 class FeedFragment: Fragment() {
-	lateinit var viewModel: FeedViewModelInterface
-	lateinit var binding: FragmentFeedBinding
+	private lateinit var viewModel: FeedViewModelInterface
+	private lateinit var binding: FragmentFeedBinding
 	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		viewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
 	}
+	
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,

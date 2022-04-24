@@ -11,12 +11,11 @@
 		android:id="@+id/feed_recycler"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:paddingHorizontal="10dp"
+		android:clipToPadding="false"
 		android:orientation="horizontal"
+		android:overScrollMode="always"
 		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-		tools:listitem="@layout/view_article_item"
-		android:fadingEdge="vertical"
-		android:fadingEdgeLength="30dp"
-		android:requiresFadingEdge="vertical"
-		android:overScrollMode="always" />
+		tools:listitem="@layout/view_article_item" />
 
 </com.facebook.shimmer.ShimmerFrameLayout>
