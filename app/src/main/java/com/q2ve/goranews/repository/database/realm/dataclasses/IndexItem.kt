@@ -15,5 +15,5 @@ open class IndexItem (
 	var id: String = UUID.randomUUID().toString(),
 	var listName: String = "",
 	var index: Int = 0,
-	var indexedArticles: RealmItemArticle? = null
+	var indexedArticle: RealmItemArticle? = null
 ): RealmObject()

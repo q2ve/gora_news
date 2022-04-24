@@ -45,7 +45,7 @@ class Repository: RepositoryInterface {
 	) {
 		val parameters = NewsGettingParameters(
 			apiKey = apiKeyProvider.getApiKey(),
-			category = category.getCategoryKey(),
+			category = category.getKey(),
 			pageSize = Constants.paginationStep,
 			page = page,
 			query = query,
@@ -57,12 +57,12 @@ class Repository: RepositoryInterface {
 		fun onDownloadSuccess(articles: List<RealmItemArticle>) {
 			val checkedArticles = objectFilter.checkList(articles)
 			realm.insertOrUpdateWithIndexing<RealmItemArticle>(
-				category.getCategoryKey(), checkedArticles, true
+				category.getKey(), checkedArticles, true
 			)
-			onSuccess(ArticlesSet(articles, null))
+			onSuccess(ArticlesSet(checkedArticles, null))
 		}
 		fun onDownloadFailed(errorType: NetworkErrorType) {
-			realm.copyIndexedFromRealm<RealmItemArticle>(category.getCategoryKey(),
+			realm.copyIndexedFromRealm<RealmItemArticle>(category.getKey(),
 				{ offlineArticles ->
 					if (offlineArticles.isEmpty()) onError(errorType) else {
 						onSuccess(ArticlesSet(offlineArticles, errorType))

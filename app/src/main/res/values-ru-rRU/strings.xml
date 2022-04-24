@@ -15,4 +15,6 @@
 	<string name="health">Здоровье</string>
 	<string name="technology">Технологии</string>
 	<string name="business">Бизнес</string>
+	<string name="article_cover">Обложка статьи</string>
+	<string name="all_news">Все новости</string>
 </resources>

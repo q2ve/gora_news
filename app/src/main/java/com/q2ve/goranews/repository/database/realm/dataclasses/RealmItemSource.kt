@@ -11,8 +11,8 @@ import io.realm.annotations.PrimaryKey
 
 open class RealmItemSource(
 	@PrimaryKey
-	var id: String? = null,
-	var name: String? = null
+	var name: String? = null,
+	var id: String? = null
 ): RealmObject(), ValidationInterface {
-	override fun checkValidity() = if (id == null || id == "") null else this
+	override fun checkValidity() = if (name == null || name == "") null else this
 }

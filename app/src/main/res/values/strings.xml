@@ -13,10 +13,14 @@
 	<string name="health">Health</string>
 	<string name="technology">Technology</string>
 	<string name="business">Business</string>
+	<string name="all_news">All news</string>
 	
 	<!-- Status messages -->
 	<string name="downloading_news">Downloading news…</string>
 	<string name="no_server_connection">Can\'t connect to server</string>
 	<string name="server_error">Server error!</string>
 	<string name="an_error_occurred">An error occurred</string>
+	
+	<!-- Content descriptions -->
+	<string name="article_cover">Article cover</string>
 </resources>

@@ -9,6 +9,8 @@ package com.q2ve.goranews.repository.database.realm
 import android.util.Log
 import com.q2ve.goranews.helpers.Constants
 import com.q2ve.goranews.repository.database.realm.dataclasses.IndexItem
+import com.q2ve.goranews.repository.database.realm.dataclasses.ResultsSetNews
+import com.q2ve.goranews.repository.network.apiRequestsParameters.NewsCategories
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmObject
@@ -265,17 +267,15 @@ class RealmIO {
 		realm.close()
 	}
 	
-//	fun getFilteredNewsResults(
-//		category: NewsCategories,
-//		onSuccess: (ResultsSetNews) -> Unit,
-//		onError: (() -> Unit)? = null
-//	) {
-//		val realm = Realm.getInstance(config)
-//		val test = realm.where(RealmItemArticle::class.java).equalTo("category", category)
-//			.equalTo("isClosed", isClosed)
-//			.lessThan("endDate", limitDate)
-//			.sort("title", Sort.ASCENDING)
-//			.findAll()
-//		//return DeadlinesRealmResultsSet(list, realm)
-//	}
+	fun getFilteredNewsResults(
+		category: NewsCategories
+	): ResultsSetNews {
+		val realm = Realm.getInstance(config)
+		val results = realm.where(IndexItem::class.java)
+			.equalTo("listName", category.getKey())
+			.sort("index", Sort.ASCENDING)
+			.findAll()
+		Log.e("test", results.toString())
+		return ResultsSetNews(results, realm)
+	}
 }

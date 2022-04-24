@@ -8,7 +8,7 @@ package com.q2ve.goranews.helpers.navigator
 
 import com.q2ve.goranews.R
 
-enum class ReplaceAnimation(
+enum class NavigatorAnimation(
 	val enterAnimation: Int,
 	val exitAnimation: Int,
 	val popEnterAnimation: Int,

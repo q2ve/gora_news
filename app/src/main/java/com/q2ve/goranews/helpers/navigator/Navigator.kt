@@ -37,7 +37,7 @@ object Navigator {
 	 */
 	fun removeFragment(
 		fragment: Fragment,
-		animation: ReplaceAnimation? = null,
+		animation: NavigatorAnimation? = null,
 		addToBackStack: Boolean = false
 	) {
 		val transaction = getTransaction()
@@ -52,7 +52,7 @@ object Navigator {
 	fun addFragment(
 		fragment: Fragment,
 		frame: Int,
-		animation: ReplaceAnimation? = null,
+		animation: NavigatorAnimation? = null,
 		addToBackStack: Boolean = false
 	) {
 		val transaction = getTransaction()
@@ -67,7 +67,7 @@ object Navigator {
 	fun replaceFragment(
 		fragment: Fragment,
 		frame: Int,
-		animation: ReplaceAnimation? = null,
+		animation: NavigatorAnimation? = null,
 		addToBackStack: Boolean = false
 	) {
 		val transaction = getTransaction()
@@ -80,7 +80,7 @@ object Navigator {
 		return fragmentManager.beginTransaction()
 	}
 	
-	private fun setAnimation(transaction: FragmentTransaction, animation: ReplaceAnimation?) {
+	private fun setAnimation(transaction: FragmentTransaction, animation: NavigatorAnimation?) {
 		if (animation != null) {
 			transaction.setCustomAnimations(
 				animation.enterAnimation,
