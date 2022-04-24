@@ -2,19 +2,25 @@
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical">
-
-	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/fragment_main_feed_recycler"
+	
+	<ScrollView
+		android:id="@+id/fragment_main_feed_scroller"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:orientation="vertical"
 		android:overScrollMode="always"
 		android:paddingTop="16dp"
 		android:clipToPadding="false"
-		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-		tools:listitem="@layout/view_category_item"/>
+		android:scrollbars="none"
+		tools:ignore="UselessParent">
+		
+		<LinearLayout
+			android:id="@+id/fragment_main_feed_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"/>
+		
+	</ScrollView>
 </LinearLayout>

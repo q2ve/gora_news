@@ -45,7 +45,7 @@ class FeedView{
 		recycler.addOnItemTouchListener(dummyOnTouchListener)
 		
 		viewModel.articles?.subscribe({ articles ->
-			//articles.forEach { Glide.with(context).load(it.urlToImage).preload() } //Async preloading
+			//articles.forEach { Glide.with(context).load(it.urlToImage).preload() } //Async preloading. Nor working.
 			val defaultAlpha = recycler.alpha
 			val duration = 400L
 			
@@ -53,6 +53,7 @@ class FeedView{
 				.alpha(0F)
 				.setInterpolator(DecelerateInterpolator())
 				.setDuration(duration)
+				.setStartDelay(duration * 2) //Just for shimmer demonstration ;)
 				.withEndAction {
 					adapter.updateData(articles)
 					binding.feedShimmer.hideShimmer()

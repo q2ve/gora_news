@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.q2ve.goranews.databinding.FragmentMainFeedBinding
+import com.q2ve.goranews.databinding.ViewCategoryItemBinding
 import com.q2ve.goranews.repository.Repository
 import com.q2ve.goranews.repository.RepositoryInterface
 import com.q2ve.goranews.repository.network.apiRequestsParameters.NewsCategories
@@ -40,18 +41,17 @@ class MainFeedFragment: Fragment() {
 		
 		val resources = inflater.context.resources
 		fun getCategoryName(it: NewsCategories) = resources.getString(it.getNameResource())
-		val categoriesFeeds = mutableListOf<CategorySet>()
 		
-		NewsCategories.values().sortedBy { getCategoryName(it) }.forEach {
+		val categoriesContainer = binding.fragmentMainFeedContainer
+		NewsCategories.values().sortedBy{ getCategoryName(it) }.forEach {
 			val categoryFeed = FeedView()
 			//categoryFeed.subscribeOnLoadingStatus()
-			val view = categoryFeed.getView(inflater, container, it, repository)
-			categoriesFeeds.add(CategorySet(getCategoryName(it),view))
+			val feedView = categoryFeed.getView(inflater, container, it, repository)
+			val categoryView = ViewCategoryItemBinding.inflate(inflater, container, false)
+			categoryView.viewCategoryItemTitle.text = resources.getString(it.getNameResource())
+			categoryView.viewCategoryItemFrame.addView(feedView)
+			categoriesContainer.addView(categoryView.root)
 		}
-		
-		val recycler = binding.fragmentMainFeedRecycler
-		recycler.adapter = MainFeedAdapter(categoriesFeeds)
-		recycler.setHasFixedSize(true)
 		
 		return binding.root
 	}
