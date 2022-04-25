@@ -30,8 +30,8 @@ class FeedViewModel(
 	override fun setQuery(query: String) { this.query = query }
 	
 	override fun loadNews() {
-		loadStatus?.value = FeedLoadStatus.Loading
 		if (!(category == null && query == "")) {
+			loadStatus?.value = FeedLoadStatus.Loading
 			repository.getNews(category, ::onNewsLoaded, ::onNewsLoadingFailed, query = query)
 		}
 	}
@@ -54,5 +54,9 @@ class FeedViewModel(
 		val intent = Intent(Intent.ACTION_VIEW)
 		intent.data = Uri.parse(article.url)
 		ContextCompat.startActivity(context, intent, null)
+	}
+	
+	override fun emptyArticlesList() {
+		articles?.value = emptyList()
 	}
 }

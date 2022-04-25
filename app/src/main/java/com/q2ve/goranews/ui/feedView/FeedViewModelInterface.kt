@@ -19,4 +19,5 @@ interface FeedViewModelInterface {
 	
 	fun loadNews()
 	fun onArticleClicked(article: RealmItemArticle, context: Context)
+	fun emptyArticlesList()
 }

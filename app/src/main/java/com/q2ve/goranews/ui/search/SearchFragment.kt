@@ -16,6 +16,7 @@ import com.q2ve.goranews.helpers.ButtonAnimator
 import com.q2ve.goranews.helpers.hideKeyboard
 import com.q2ve.goranews.repository.Repository
 import com.q2ve.goranews.repository.RepositoryInterface
+import com.q2ve.goranews.ui.FeedLoadStatus
 import com.q2ve.goranews.ui.feedView.FeedView
 import java.util.*
 
@@ -39,8 +40,13 @@ class SearchFragment: Fragment() {
 		
 		val title = binding.fragmentSearchTitle
 		categoryFeed.viewModel?.loadStatus?.subscribe({
+			//Sets label of the load status
 			val resource = it.getDefaultMessage()
 			title.text = resources.getString(resource)
+			//Empties feed if couldn't receive searched news
+			if (it != FeedLoadStatus.LoadedOffline && it.errorType != null) {
+				categoryFeed.viewModel?.emptyArticlesList()
+			}
 		}, subscribeKey)
 		
 		val searchBox = binding.fragmentSearchSearchFrame
@@ -48,12 +54,12 @@ class SearchFragment: Fragment() {
 			searchBox,
 			inflater,
 			{
-				if (it != "") {
+				if (it != "") { //On search call
 					categoryFeed.viewModel?.setQuery(it)
 					categoryFeed.viewModel?.loadNews()
-				}
+				} else categoryFeed.viewModel?.emptyArticlesList()
 			},
-			{ hideKeyboard() },
+			{ hideKeyboard() }, //On lost focus call
 			800
 		)
 		
