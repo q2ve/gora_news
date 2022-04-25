@@ -42,7 +42,7 @@ class FeedView: FeedViewInterface {
 		recycler.setHasFixedSize(true)
 		//recycler.setItemViewCacheSize(4)
 		
-		val preloader = adapter.buildPreloader(context, 18)
+		val preloader = adapter.buildPreloader(context, 8)
 		recycler.addOnScrollListener(preloader)
 		
 		//Dummy listener is necessary to restrict any interaction with recycler.
