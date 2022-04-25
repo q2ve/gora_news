@@ -19,7 +19,8 @@ interface FeedViewInterface {
 		container: ViewGroup?,
 		category: NewsCategories?,
 		repository: RepositoryInterface,
-		showDummies: Int? = 5
+		showDummies: Int? = 5,
+		startDelay: Long = 400
 	): View
 	
 	/**

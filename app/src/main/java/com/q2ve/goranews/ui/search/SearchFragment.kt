@@ -16,13 +16,13 @@ import com.q2ve.goranews.helpers.ButtonAnimator
 import com.q2ve.goranews.helpers.hideKeyboard
 import com.q2ve.goranews.repository.Repository
 import com.q2ve.goranews.repository.RepositoryInterface
-import com.q2ve.goranews.ui.feedView.alternate.AlternateFeedView
+import com.q2ve.goranews.ui.feedView.FeedView
 import java.util.*
 
 class SearchFragment: Fragment() {
 	private val repository: RepositoryInterface = Repository()
 	private lateinit var binding: FragmentSearchBinding
-	private var feed: AlternateFeedView? = null
+	private var feed: FeedView? = null
 	private val subscribeKey = UUID.randomUUID().toString()
 	
 	override fun onCreateView(
@@ -32,14 +32,14 @@ class SearchFragment: Fragment() {
 	): View {
 		binding = FragmentSearchBinding.inflate(inflater, container, false)
 		
-		val title = binding.fragmentSearchTitle
-		
-		val categoryFeed = AlternateFeedView()
+		val categoryFeed = FeedView()
 		this.feed = categoryFeed
-		val feedView = categoryFeed.getView(inflater, container, null, repository, null)
+		val feedView = categoryFeed.getView(inflater, container, null, repository, null, 100)
 		binding.fragmentSearchFeedFrame.addView(feedView)
+		
+		val title = binding.fragmentSearchTitle
 		categoryFeed.viewModel?.loadStatus?.subscribe({
-			var resource = it.getDefaultMessage()
+			val resource = it.getDefaultMessage()
 			title.text = resources.getString(resource)
 		}, subscribeKey)
 		

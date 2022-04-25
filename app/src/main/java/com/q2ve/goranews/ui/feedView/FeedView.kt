@@ -6,21 +6,14 @@
 
 package com.q2ve.goranews.ui.feedView
 
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.DecelerateInterpolator
-import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
-import com.q2ve.goranews.R
 import com.q2ve.goranews.databinding.ViewFeedBinding
 import com.q2ve.goranews.repository.RepositoryInterface
 import com.q2ve.goranews.repository.network.apiRequestsParameters.NewsCategories
@@ -35,7 +28,8 @@ class FeedView: FeedViewInterface {
 		container: ViewGroup?,
 		category: NewsCategories?,
 		repository: RepositoryInterface,
-		showDummies: Int?
+		showDummies: Int?,
+		startDelay: Long
 	): View {
 		val binding = ViewFeedBinding.inflate(inflater, container, false)
 		val context = inflater.context
@@ -46,6 +40,10 @@ class FeedView: FeedViewInterface {
 		val adapter = FeedViewAdapter({ viewModel.onArticleClicked(it, context) }, showDummies)
 		recycler.adapter = adapter
 		recycler.setHasFixedSize(true)
+		//recycler.setItemViewCacheSize(4)
+		
+		val preloader = adapter.buildPreloader(context, 18)
+		recycler.addOnScrollListener(preloader)
 		
 		//Dummy listener is necessary to restrict any interaction with recycler.
 		val dummyOnTouchListener = object: RecyclerView.OnItemTouchListener {
@@ -56,61 +54,30 @@ class FeedView: FeedViewInterface {
 		recycler.addOnItemTouchListener(dummyOnTouchListener)
 		
 		viewModel.articles?.subscribe({ articles ->
-			val articlesSets = buildList<ArticleSet?> { for (i in 1..20) this.add(null) }.toMutableList()
-			
-			fun onBitmapsCollected() {
-				val defaultAlpha = recycler.alpha
-				val duration = 400L
-				ViewCompat.animate(recycler)
-					.alpha(0F)
-					.setInterpolator(DecelerateInterpolator())
-					.setDuration(duration)
-					.setStartDelay(duration) //Just for shimmer demonstration ;)
-					.withEndAction {
-						adapter.updateData(articlesSets)
-						binding.feedShimmer.hideShimmer()
-						recycler.removeOnItemTouchListener(dummyOnTouchListener)
-						ViewCompat.animate(recycler)
-							.alpha(defaultAlpha)
-							.setInterpolator(AccelerateDecelerateInterpolator())
-							.setDuration(duration)
-							.setStartDelay(duration)
-							.start()
-					}
-					.start()
-			}
-			
-			// Error may occur multiple times for a single request.
-			// Even before successful response.
-			// So i had to do this. Sorry.
-			val usedIndexes = mutableListOf<Int>()
-			articles.forEachIndexed { index, it ->
-				Glide.with(context.applicationContext)
-					.asBitmap()
-					.load(it.urlToImage)
-					.error(R.drawable.pc_broken_image_stub)
-					.centerCrop()
-					.fitCenter()
-					.into(object: CustomTarget<Bitmap>(){
-						override fun onResourceReady(
-							resource: Bitmap, transition: Transition<in Bitmap>?
-						) {
-							articlesSets[index] = ArticleSet(it, resource)
-							if (!usedIndexes.contains(index)) usedIndexes.add(index)
-							if (usedIndexes.size == articles.size) onBitmapsCollected()
-						}
-						override fun onLoadCleared(placeholder: Drawable?) { }
-						override fun onLoadFailed(errorDrawable: Drawable?) {
-							if (!usedIndexes.contains(index)) {
-								usedIndexes.add(index)
-								articlesSets[index] = ArticleSet(it, errorDrawable?.toBitmap())
-							}
-							if (usedIndexes.size == articles.size) onBitmapsCollected()
-						}
-					})
-			}
+			//articles.forEach { Glide.with(context).load(it.urlToImage).preload() } //Async preloading. Nor working.
+			val defaultAlpha = recycler.alpha
+			val duration = 400L
+			ViewCompat.animate(recycler)
+				.alpha(0F)
+				.setInterpolator(DecelerateInterpolator())
+				.setDuration(duration)
+				.setStartDelay(startDelay) //Just for shimmer demonstration ;)
+				.withEndAction {
+					adapter.updateData(articles)
+					binding.feedShimmer.hideShimmer()
+					recycler.removeOnItemTouchListener(dummyOnTouchListener)
+					ViewCompat.animate(recycler)
+						.alpha(defaultAlpha)
+						.setInterpolator(AccelerateDecelerateInterpolator())
+						.setDuration(duration)
+						.setStartDelay(startDelay)
+						.start()
+				}
+				.start()
 		})
+		
 		viewModel.loadNews()
+		
 		return binding.root
 	}
 	
