@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout
+	android:id="@+id/feed_shimmer"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	app:shimmer_colored="true"
+	app:shimmer_base_color="@color/shimmerGray"
+	app:shimmer_highlight_alpha="0">
+	
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/feed_recycler"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingHorizontal="10dp"
+		android:clipToPadding="false"
+		android:orientation="horizontal"
+		android:overScrollMode="always"
+		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+		tools:listitem="@layout/view_article_item" />
+
+</com.facebook.shimmer.ShimmerFrameLayout>
