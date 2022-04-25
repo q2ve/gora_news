@@ -40,8 +40,10 @@ class MainFeedFragment: Fragment() {
 		
 		val title = binding.fragmentMainFeedTitle
 		viewModel.loadStatus?.subscribe({
-			var resource = it.getDefaultMessage()
-			title.text = resources.getString(resource)
+			if (!this.isDetached) {
+				val resource = it.getDefaultMessage()
+				title.text = resources.getString(resource)
+			}
 		}, subscribeKey)
 		
 		val searchButton = binding.fragmentMainFeedSearchButton
