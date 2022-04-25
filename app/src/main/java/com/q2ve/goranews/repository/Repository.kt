@@ -18,7 +18,7 @@ import com.q2ve.goranews.repository.network.retrofit.RetrofitCalls
 
 class Repository: RepositoryInterface {
 	private val networkClient: NetworkInterface = RetrofitCalls()
-	private val apiKeyProvider: ApiKeyProviderInterface = ApiKeyProvider()
+	private val apiKeyProvider: ApiKeyProviderInterface = ApiKeyProvider
 	private val objectFilter: ObjectFilterInterface = ObjectFilter()
 	private val realm = RealmIO()
 	

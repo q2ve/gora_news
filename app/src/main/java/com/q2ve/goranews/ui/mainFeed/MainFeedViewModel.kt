@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import com.q2ve.goranews.R
-import com.q2ve.goranews.helpers.Constants
 import com.q2ve.goranews.helpers.Observable
 import com.q2ve.goranews.helpers.navigator.Navigator
 import com.q2ve.goranews.helpers.navigator.NavigatorAnimation
@@ -18,7 +17,6 @@ import com.q2ve.goranews.repository.RepositoryInterface
 import com.q2ve.goranews.repository.network.apiRequestsParameters.NewsCategories
 import com.q2ve.goranews.ui.FeedLoadStatus
 import com.q2ve.goranews.ui.feedView.FeedView
-import com.q2ve.goranews.ui.feedView.alternate.AlternateFeedView
 import com.q2ve.goranews.ui.search.SearchFragment
 
 class MainFeedViewModel: ViewModel(), MainFeedViewModelInterface {
@@ -40,7 +38,7 @@ class MainFeedViewModel: ViewModel(), MainFeedViewModelInterface {
 		fun getCategoryName(it: NewsCategories) = resources.getString(it.getNameResource())
 		
 		NewsCategories.values().sortedBy{ getCategoryName(it) }.forEachIndexed { index, it ->
-			val categoryFeed = if (Constants.useAlternativeFeed) AlternateFeedView() else FeedView()
+			val categoryFeed = FeedView()
 			val view = categoryFeed.getView(inflater, container, it, repository)
 			categoryFeed.subscribeOnLoadingStatus { updateStatusList(it, index) }
 			val categorySet = CategorySet(getCategoryName(it),view)
