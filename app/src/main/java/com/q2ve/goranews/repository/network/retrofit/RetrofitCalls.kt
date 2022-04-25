@@ -59,17 +59,29 @@ class RetrofitCalls: NetworkInterface {
 		}
 		
 		val callback = CallbackBuilder().buildCallback(::onCallbackSuccess, onError)
-		val call = caller.getRequest().getNews(
-			apiKey = parameters.apiKey,
-			language = parameters.language,
-			country = parameters.country,
-			category = parameters.category,
-			q = parameters.query,
-			searchIn = parameters.searchScope,
-			sortBy = parameters.sortOrder,
-			pageSize = parameters.pageSize,
-			page = parameters.page
-		)
+		val call = if (parameters.query == "") {
+			caller.getRequest().getNews(
+				apiKey = parameters.apiKey,
+				language = parameters.language,
+				country = parameters.country,
+				category = parameters.category,
+				q = parameters.query,
+				searchIn = parameters.searchScope,
+				sortBy = parameters.sortOrder,
+				pageSize = parameters.pageSize,
+				page = parameters.page
+			)
+		} else {
+			caller.getRequest().searchNews(
+				apiKey = parameters.apiKey,
+				language = parameters.language,
+				q = parameters.query,
+				searchIn = parameters.searchScope,
+				sortBy = parameters.sortOrder,
+				pageSize = parameters.pageSize,
+				page = parameters.page
+			)
+		}
 		caller.enqueueCall(call, callback)
 	}
 }

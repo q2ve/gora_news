@@ -24,16 +24,6 @@ class MainFeedFragment: Fragment() {
 	private lateinit var binding: FragmentMainFeedBinding
 	private val subscribeKey = UUID.randomUUID().toString()
 	
-	companion object {
-		fun newInstance(activityFrame: Int): MainFeedFragment {
-			val args = Bundle()
-			args.putInt("activityFrame", activityFrame)
-			val fragment = MainFeedFragment()
-			fragment.arguments = args
-			return fragment
-		}
-	}
-	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		val viewModel = ViewModelProvider(this).get(MainFeedViewModel::class.java)
@@ -50,14 +40,13 @@ class MainFeedFragment: Fragment() {
 		
 		val title = binding.fragmentMainFeedTitle
 		viewModel.loadStatus?.subscribe({
-			val resource = it.errorType?.getDefaultMessage() ?: it.getDefaultMessage()
+			var resource = it.getDefaultMessage()
 			title.text = resources.getString(resource)
 		}, subscribeKey)
 		
 		val searchButton = binding.fragmentMainFeedSearchButton
 		ButtonAnimator(searchButton).animateStrongPressingWithFading()
-		val activityFrame = arguments?.getInt("activityFrame")
-		searchButton.setOnClickListener { viewModel.onSearchClicked(activityFrame) }
+		searchButton.setOnClickListener { viewModel.onSearchClicked() }
 		
 		val recycler = binding.fragmentMainFeedRecycler
 		recycler.setHasFixedSize(true)

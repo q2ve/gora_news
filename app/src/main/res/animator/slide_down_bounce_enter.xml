@@ -5,14 +5,14 @@
 		android:propertyName="y"
 		android:valueType="floatType"
 		android:valueFrom="-3000"
-		android:valueTo="80"
+		android:valueTo="4"
 		android:duration="300" />
 
 	<objectAnimator
 		android:interpolator="@android:anim/accelerate_decelerate_interpolator"
 		android:propertyName="y"
 		android:valueType="floatType"
-		android:valueFrom="80"
+		android:valueFrom="4"
 		android:valueTo="0"
 		android:duration="150" />
 </set>

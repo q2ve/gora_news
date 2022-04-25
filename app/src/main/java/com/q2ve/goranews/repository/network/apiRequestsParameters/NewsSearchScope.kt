@@ -13,7 +13,10 @@ enum class NewsSearchScope {
 	
 	companion object {
 		fun getCompositeKey(vararg scopes: NewsSearchScope): String {
-			return buildString { scopes.forEach { this.append(it.getKey() + ",") } }
+			return buildString {
+				scopes.forEach { this.append(it.getKey() + ",") }
+				this.deleteCharAt(this.lastIndex)
+			}
 		}
 	}
 	

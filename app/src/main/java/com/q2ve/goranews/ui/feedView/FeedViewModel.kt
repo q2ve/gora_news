@@ -30,11 +30,9 @@ class FeedViewModel(
 	override fun setQuery(query: String) { this.query = query }
 	
 	override fun loadNews() {
-		if (category != null) {
-			loadStatus?.value = FeedLoadStatus.Loading
-			repository.getNews(category, ::onNewsLoaded, ::onNewsLoadingFailed)
-		} else {
-			//TODO("Searching feature.")
+		loadStatus?.value = FeedLoadStatus.Loading
+		if (!(category == null && query == "")) {
+			repository.getNews(category, ::onNewsLoaded, ::onNewsLoadingFailed, query = query)
 		}
 	}
 	

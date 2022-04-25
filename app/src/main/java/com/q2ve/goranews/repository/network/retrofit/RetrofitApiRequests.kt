@@ -25,4 +25,15 @@ interface RetrofitApiRequests {
 		@Query("pageSize") pageSize: Int,
 		@Query("page") page: Int,
 	): Call<RetrofitItemResponseArticles>
+	
+	@GET("everything?")
+	fun searchNews (
+		@Header("X-Api-Key") apiKey: String,
+		@Query("language") language: String,
+		@Query("q") q: String,
+		@Query("searchIn") searchIn: String,
+		@Query("sortBy") sortBy: String,
+		@Query("pageSize") pageSize: Int,
+		@Query("page") page: Int,
+	): Call<RetrofitItemResponseArticles>
 }

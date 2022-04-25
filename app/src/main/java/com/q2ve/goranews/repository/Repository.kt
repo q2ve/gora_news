@@ -33,7 +33,7 @@ class Repository: RepositoryInterface {
 	 * If it doesn't find them in database - will call "onError".
 	 */
 	override fun getNews(
-		category: NewsCategories,
+		category: NewsCategories?,
 		onSuccess: (ArticlesSet, NetworkErrorType?) -> Unit,
 		onError: (NetworkErrorType) -> Unit,
 		language: NewsLanguages,
@@ -45,7 +45,7 @@ class Repository: RepositoryInterface {
 	) {
 		val parameters = NewsGettingParameters(
 			apiKey = apiKeyProvider.getApiKey(),
-			category = category.getKey(),
+			category = category?.getKey() ?: "",
 			pageSize = Constants.paginationStep,
 			page = page,
 			query = query,
@@ -57,12 +57,12 @@ class Repository: RepositoryInterface {
 		fun onDownloadSuccess(articles: List<RealmItemArticle>) {
 			val checkedArticles = objectFilter.checkList(articles)
 			realm.insertOrUpdateWithIndexing<RealmItemArticle>(
-				category.getKey(), checkedArticles, true
+				category?.getKey() ?: query, checkedArticles, true
 			)
 			onSuccess(ArticlesSet(checkedArticles, null), null)
 		}
 		fun onDownloadFailed(errorType: NetworkErrorType) {
-			realm.copyIndexedFromRealm<RealmItemArticle>(category.getKey(),
+			realm.copyIndexedFromRealm<RealmItemArticle>(category?.getKey() ?: query,
 				{ offlineArticles ->
 					if (offlineArticles.isEmpty()) onError(errorType) else {
 						onSuccess(ArticlesSet(offlineArticles, errorType), errorType)

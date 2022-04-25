@@ -8,7 +8,6 @@ package com.q2ve.goranews.ui.feedView.alternate
 
 import android.content.Context
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -94,13 +93,11 @@ class AlternateFeedViewAdapter(
 	): RecyclerViewPreloader<String> {
 		val modelProvider = object: ListPreloader.PreloadModelProvider<String> {
 			override fun getPreloadItems(position: Int): MutableList<String> {
-				Log.e("getPreloadItems", articles[position].urlToImage.toString())
 				val url = articles[position].urlToImage
 				return if (TextUtils.isEmpty(url)) Collections.emptyList()
 				else Collections.singletonList(url)
 			}
 			override fun getPreloadRequestBuilder(item: String): RequestBuilder<*> {
-				Log.e("getPreloadRequestBuilder", item)
 				return Glide.with(context)
 					.load(item)
 					.transition(DrawableTransitionOptions.withCrossFade(150))

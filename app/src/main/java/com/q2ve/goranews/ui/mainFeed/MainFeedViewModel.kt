@@ -17,9 +17,9 @@ import com.q2ve.goranews.helpers.navigator.NavigatorAnimation
 import com.q2ve.goranews.repository.RepositoryInterface
 import com.q2ve.goranews.repository.network.apiRequestsParameters.NewsCategories
 import com.q2ve.goranews.ui.FeedLoadStatus
-import com.q2ve.goranews.ui.SearchFragment
 import com.q2ve.goranews.ui.feedView.FeedView
 import com.q2ve.goranews.ui.feedView.alternate.AlternateFeedView
+import com.q2ve.goranews.ui.search.SearchFragment
 
 class MainFeedViewModel: ViewModel(), MainFeedViewModelInterface {
 	override var loadStatus: Observable<FeedLoadStatus>? = null

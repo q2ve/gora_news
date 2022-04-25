@@ -19,6 +19,7 @@ import com.q2ve.goranews.repository.RepositoryInterface
 import com.q2ve.goranews.repository.network.apiRequestsParameters.NewsCategories
 import com.q2ve.goranews.ui.FeedLoadStatus
 import com.q2ve.goranews.ui.feedView.FeedViewInterface
+import com.q2ve.goranews.ui.feedView.FeedViewModel
 import com.q2ve.goranews.ui.feedView.FeedViewModelInterface
 
 
@@ -29,15 +30,16 @@ class AlternateFeedView: FeedViewInterface {
 		inflater: LayoutInflater,
 		container: ViewGroup?,
 		category: NewsCategories?,
-		repository: RepositoryInterface
+		repository: RepositoryInterface,
+		showDummies: Int?
 	): View {
 		val binding = ViewFeedBinding.inflate(inflater, container, false)
 		val context = inflater.context
-		val viewModel: FeedViewModelInterface = AlternateFeedViewModel(category, repository)
+		val viewModel: FeedViewModelInterface = FeedViewModel(category, repository)
 		this.viewModel = viewModel
 		
 		val recycler = binding.feedRecycler
-		val adapter = AlternateFeedViewAdapter({ viewModel.onArticleClicked(it, context) })
+		val adapter = AlternateFeedViewAdapter({ viewModel.onArticleClicked(it, context) }, showDummies)
 		recycler.adapter = adapter
 		recycler.setHasFixedSize(true)
 		//recycler.setItemViewCacheSize(4)
@@ -62,7 +64,7 @@ class AlternateFeedView: FeedViewInterface {
 				.alpha(0F)
 				.setInterpolator(DecelerateInterpolator())
 				.setDuration(duration)
-				.setStartDelay(duration) //Just for shimmer demonstration ;)
+				//.setStartDelay(duration) //Just for shimmer demonstration ;)
 				.withEndAction {
 					adapter.updateData(articles)
 					binding.feedShimmer.hideShimmer()

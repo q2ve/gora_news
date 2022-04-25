@@ -25,7 +25,7 @@ interface RepositoryInterface {
 	 * If it doesn't find them there - will call "onError".
 	 */
 	fun getNews(
-		category: NewsCategories,
+		category: NewsCategories?,
 		onSuccess: (ArticlesSet, NetworkErrorType?) -> Unit,
 		onError: (NetworkErrorType) -> Unit,
 		language: NewsLanguages = NewsLanguages.All,

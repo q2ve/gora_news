@@ -34,7 +34,8 @@ class FeedView: FeedViewInterface {
 		inflater: LayoutInflater,
 		container: ViewGroup?,
 		category: NewsCategories?,
-		repository: RepositoryInterface
+		repository: RepositoryInterface,
+		showDummies: Int?
 	): View {
 		val binding = ViewFeedBinding.inflate(inflater, container, false)
 		val context = inflater.context
@@ -42,7 +43,7 @@ class FeedView: FeedViewInterface {
 		this.viewModel = viewModel
 		
 		val recycler = binding.feedRecycler
-		val adapter = FeedViewAdapter({ viewModel.onArticleClicked(it, context) })
+		val adapter = FeedViewAdapter({ viewModel.onArticleClicked(it, context) }, showDummies)
 		recycler.adapter = adapter
 		recycler.setHasFixedSize(true)
 		
@@ -84,7 +85,7 @@ class FeedView: FeedViewInterface {
 			// So i had to do this. Sorry.
 			val usedIndexes = mutableListOf<Int>()
 			articles.forEachIndexed { index, it ->
-				Glide.with(context)
+				Glide.with(context.applicationContext)
 					.asBitmap()
 					.load(it.urlToImage)
 					.error(R.drawable.pc_broken_image_stub)

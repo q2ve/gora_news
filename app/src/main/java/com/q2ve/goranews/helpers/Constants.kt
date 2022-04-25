@@ -9,9 +9,9 @@ package com.q2ve.goranews.helpers
 object Constants {
 	// Left API keys here for the clarity. Otherwise, i would put it in the gradle files.
 	// Each key allows only 100 requests per day. 14 starts of the app.
-	//const val serverApiKey = "ac0793eb091f4bde9622dae5dfad2202" //My mail.
+	const val serverApiKey = "ac0793eb091f4bde9622dae5dfad2202" //My mail.
 		//const val serverApiKey = "5b24feab76bd41d4a22d2229c7fe7b0d" //TempMail.
-			const val serverApiKey = "244c9da99c794df882d494f9b8fe1007" //TempMail. Again.
+			//const val serverApiKey = "244c9da99c794df882d494f9b8fe1007" //TempMail. Again.
 				//const val serverApiKey = "8509c8f3f79a4c78830a78b4e4d15702" //TempMail. Again. Again. <---
 					//const val serverApiKey = "d1a9009a630f4cb8909b3649a2c8cb71" //TempMail. For release.
 	
@@ -27,5 +27,5 @@ object Constants {
 	const val realmName = "GORA_News_database"
 	
 	//Functional
-	const val useAlternativeFeed = false
+	const val useAlternativeFeed = true
 }

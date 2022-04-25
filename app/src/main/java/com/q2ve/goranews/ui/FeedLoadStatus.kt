@@ -17,5 +17,9 @@ enum class FeedLoadStatus(private val defaultMessageResource: Int) {
 	
 	var errorType: NetworkErrorType? = null
 	
-	fun getDefaultMessage(): Int = errorType?.getDefaultMessage() ?: this.defaultMessageResource
+	fun getDefaultMessage(): Int {
+		return if (errorType == NetworkErrorType.NoConnection && this == LoadedOffline) {
+			LoadedOffline.defaultMessageResource
+		} else errorType?.getDefaultMessage() ?: this.defaultMessageResource
+	}
 }

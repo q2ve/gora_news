@@ -18,7 +18,8 @@ interface FeedViewInterface {
 		inflater: LayoutInflater,
 		container: ViewGroup?,
 		category: NewsCategories?,
-		repository: RepositoryInterface
+		repository: RepositoryInterface,
+		showDummies: Int? = 5
 	): View
 	
 	/**

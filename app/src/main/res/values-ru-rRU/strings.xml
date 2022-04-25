@@ -20,4 +20,7 @@
 	<string name="downloaded_offline">Оффлайн новости</string>
 	<string name="throttling">Лимит запросов вышел</string>
 	<string name="search_button">Кнопка поиска</string>
+	<string name="search_with_ellipsis">Поиск…</string>
+	<string name="close_button">Кнопка закрытия</string>
+	<string name="search">Поиск</string>
 </resources>

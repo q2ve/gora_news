@@ -29,5 +29,14 @@
 		<item name="android:gravity">right|bottom</item>
 		<item name="android:textAlignment">gravity</item>
 	</style>
-
+	
+	<style name="TextOrdinarySingleLine">
+		<item name="android:textSize">18sp</item>
+		<item name="android:textColor">@color/black</item>
+		<item name="android:maxLines">1</item>
+		<item name="android:ellipsize">end</item>
+		<item name="android:gravity">center_vertical</item>
+		<item name="android:textAlignment">gravity</item>
+	</style>
+	
 </resources>

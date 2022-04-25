@@ -6,6 +6,7 @@
 	
 	<!-- Titles -->
 	<string name="news">News</string>
+	<string name="search">Search</string>
 	<string name="science">Science</string>
 	<string name="entertainment">Entertainment</string>
 	<string name="sports">Sports</string>
@@ -26,4 +27,8 @@
 	<!-- Content descriptions -->
 	<string name="article_cover">Article cover</string>
 	<string name="search_button">Search button</string>
+	<string name="close_button">Close_button</string>
+	
+	<!-- Hints -->
+	<string name="search_with_ellipsis">Search…</string>
 </resources>
