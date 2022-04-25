@@ -4,10 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/MyFiles/YandexDisk/Programming/Android/GoraNews/app/src/main/res/drawable-v24/ic_back_arrow.xml" value="0.245" />
+        <entry key="..\:/MyFiles/YandexDisk/Programming/Android/GoraNews/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.245" />
         <entry key="..\:/MyFiles/YandexDisk/Programming/Android/GoraNews/app/src/main/res/drawable-v24/rc_search_field.xml" value="0.245" />
         <entry key="..\:/MyFiles/YandexDisk/Programming/Android/GoraNews/app/src/main/res/drawable/bg_article_gradient.xml" value="0.2385" />
         <entry key="..\:/MyFiles/YandexDisk/Programming/Android/GoraNews/app/src/main/res/drawable/ic_back_arrow.xml" value="0.245" />
+        <entry key="..\:/MyFiles/YandexDisk/Programming/Android/GoraNews/app/src/main/res/drawable/ic_launcher_background.xml" value="0.245" />
+        <entry key="..\:/MyFiles/YandexDisk/Programming/Android/GoraNews/app/src/main/res/drawable/ic_orig.xml" value="0.245" />
         <entry key="..\:/MyFiles/YandexDisk/Programming/Android/GoraNews/app/src/main/res/drawable/ic_plus.xml" value="0.245" />
+        <entry key="..\:/MyFiles/YandexDisk/Programming/Android/GoraNews/app/src/main/res/drawable/ic_search.xml" value="0.245" />
         <entry key="..\:/MyFiles/YandexDisk/Programming/Android/GoraNews/app/src/main/res/drawable/rc_20dp.xml" value="0.2385" />
         <entry key="..\:/MyFiles/YandexDisk/Programming/Android/GoraNews/app/src/main/res/drawable/rc_search_field.xml" value="0.245" />
         <entry key="..\:/MyFiles/YandexDisk/Programming/Android/GoraNews/app/src/main/res/font/ttcommons.xml" value="0.4107692307692308" />
@@ -20,6 +24,7 @@
         <entry key="..\:/MyFiles/YandexDisk/Programming/Android/GoraNews/app/src/main/res/layout/view_category_feed_item.xml" value="0.38697916666666665" />
         <entry key="..\:/MyFiles/YandexDisk/Programming/Android/GoraNews/app/src/main/res/layout/view_feed.xml" value="0.381025641025641" />
         <entry key="..\:/MyFiles/YandexDisk/Programming/Android/GoraNews/app/src/main/res/layout/view_search_field.xml" value="0.38697916666666665" />
+        <entry key="..\:/MyFiles/YandexDisk/Programming/Android/GoraNews/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.245" />
       </map>
     </option>
   </component>
