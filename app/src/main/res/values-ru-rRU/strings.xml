@@ -5,7 +5,7 @@
 	<string name="app_name">GORA Новости</string>
 	<string name="news">Новости</string>
 	<string name="downloading_news">Загружаем новости…</string>
-	<string name="no_server_connection">Нет подключения к серверу</string>
+	<string name="no_server_connection">Нет подключения</string>
 	<string name="server_error">Ошибка сервера!</string>
 	<string name="an_error_occurred">Произошла ошибка</string>
 	<string name="science">Наука</string>
@@ -17,4 +17,7 @@
 	<string name="business">Бизнес</string>
 	<string name="article_cover">Обложка статьи</string>
 	<string name="all_news">Все новости</string>
+	<string name="downloaded_offline">Оффлайн новости</string>
+	<string name="throttling">Лимит запросов вышел</string>
+	<string name="search_button">Кнопка поиска</string>
 </resources>

@@ -17,10 +17,13 @@
 	
 	<!-- Status messages -->
 	<string name="downloading_news">Downloading news…</string>
-	<string name="no_server_connection">Can\'t connect to server</string>
+	<string name="downloaded_offline">Offline news</string>
+	<string name="no_server_connection">Can\'t connect</string>
 	<string name="server_error">Server error!</string>
 	<string name="an_error_occurred">An error occurred</string>
+	<string name="throttling">No requests left</string>
 	
 	<!-- Content descriptions -->
 	<string name="article_cover">Article cover</string>
+	<string name="search_button">Search button</string>
 </resources>

@@ -12,7 +12,7 @@ enum class NetworkErrorType(private val defaultMessageResource: Int) {
 	InvalidApiKey(R.string.an_error_occurred),
 	UnknownServerError(R.string.server_error),
 	BadRequest(R.string.an_error_occurred),
-	Throttling(R.string.an_error_occurred),
+	Throttling(R.string.throttling),
 	NoConnection(R.string.no_server_connection);
 	
 	fun getDefaultMessage(): Int = this.defaultMessageResource

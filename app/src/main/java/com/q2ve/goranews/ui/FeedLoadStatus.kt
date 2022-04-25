@@ -6,6 +6,16 @@
 
 package com.q2ve.goranews.ui
 
-enum class FeedLoadStatus {
-	Loading, Loaded, LoadedOffline, Error
+import com.q2ve.goranews.R
+import com.q2ve.goranews.repository.network.NetworkErrorType
+
+enum class FeedLoadStatus(private val defaultMessageResource: Int) {
+	Loading(R.string.downloading_news),
+	Loaded(R.string.news),
+	LoadedOffline(R.string.downloaded_offline),
+	Error(R.string.an_error_occurred);
+	
+	var errorType: NetworkErrorType? = null
+	
+	fun getDefaultMessage(): Int = errorType?.getDefaultMessage() ?: this.defaultMessageResource
 }

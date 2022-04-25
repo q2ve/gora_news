@@ -26,7 +26,7 @@ interface RepositoryInterface {
 	 */
 	fun getNews(
 		category: NewsCategories,
-		onSuccess: (ArticlesSet) -> Unit,
+		onSuccess: (ArticlesSet, NetworkErrorType?) -> Unit,
 		onError: (NetworkErrorType) -> Unit,
 		language: NewsLanguages = NewsLanguages.All,
 		country: String = "", //It's too boring to create enum for these 54 countries. Especially when we don't use them

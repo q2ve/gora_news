@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<style name="Theme.GoraNews" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+	<style name="Theme.GoraNews" parent="Theme.MaterialComponents.NoActionBar">
 		<item name="colorPrimary">@color/nymph_thigh</item>
 		<item name="android:textColorPrimary">@color/black</item>
 		<item name="android:statusBarColor">?attr/colorPrimary</item>

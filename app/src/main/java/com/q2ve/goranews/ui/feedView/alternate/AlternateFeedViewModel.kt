@@ -4,7 +4,7 @@
  * qwq2eq@gmail.com
  */
 
-package com.q2ve.goranews.ui.feedView
+package com.q2ve.goranews.ui.feedView.alternate
 
 import android.content.Context
 import android.content.Intent
@@ -17,8 +17,9 @@ import com.q2ve.goranews.repository.database.realm.dataclasses.RealmItemArticle
 import com.q2ve.goranews.repository.network.NetworkErrorType
 import com.q2ve.goranews.repository.network.apiRequestsParameters.NewsCategories
 import com.q2ve.goranews.ui.FeedLoadStatus
+import com.q2ve.goranews.ui.feedView.FeedViewModelInterface
 
-class FeedViewModel(
+class AlternateFeedViewModel(
 	private val category: NewsCategories?,
 	private val repository: RepositoryInterface
 ): FeedViewModelInterface {

@@ -13,16 +13,26 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.q2ve.goranews.databinding.FragmentMainFeedBinding
-import com.q2ve.goranews.databinding.ViewCategoryItemBinding
+import com.q2ve.goranews.helpers.ButtonAnimator
 import com.q2ve.goranews.repository.Repository
 import com.q2ve.goranews.repository.RepositoryInterface
-import com.q2ve.goranews.repository.network.apiRequestsParameters.NewsCategories
-import com.q2ve.goranews.ui.feedView.FeedView
+import java.util.*
 
 class MainFeedFragment: Fragment() {
 	private val repository: RepositoryInterface = Repository()
 	private lateinit var viewModel: MainFeedViewModelInterface
 	private lateinit var binding: FragmentMainFeedBinding
+	private val subscribeKey = UUID.randomUUID().toString()
+	
+	companion object {
+		fun newInstance(activityFrame: Int): MainFeedFragment {
+			val args = Bundle()
+			args.putInt("activityFrame", activityFrame)
+			val fragment = MainFeedFragment()
+			fragment.arguments = args
+			return fragment
+		}
+	}
 	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -36,28 +46,35 @@ class MainFeedFragment: Fragment() {
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View {
-		viewModel.onCreateView()
 		binding = FragmentMainFeedBinding.inflate(inflater, container, false)
 		
-		val resources = inflater.context.resources
-		fun getCategoryName(it: NewsCategories) = resources.getString(it.getNameResource())
+		val title = binding.fragmentMainFeedTitle
+		viewModel.loadStatus?.subscribe({
+			val resource = it.errorType?.getDefaultMessage() ?: it.getDefaultMessage()
+			title.text = resources.getString(resource)
+		}, subscribeKey)
 		
-		val categoriesContainer = binding.fragmentMainFeedContainer
-		NewsCategories.values().sortedBy{ getCategoryName(it) }.forEach {
-			val categoryFeed = FeedView()
-			//categoryFeed.subscribeOnLoadingStatus()
-			val feedView = categoryFeed.getView(inflater, container, it, repository)
-			val categoryView = ViewCategoryItemBinding.inflate(inflater, container, false)
-			categoryView.viewCategoryItemTitle.text = resources.getString(it.getNameResource())
-			categoryView.viewCategoryItemFrame.addView(feedView)
-			categoriesContainer.addView(categoryView.root)
-		}
+		val searchButton = binding.fragmentMainFeedSearchButton
+		ButtonAnimator(searchButton).animateStrongPressingWithFading()
+		val activityFrame = arguments?.getInt("activityFrame")
+		searchButton.setOnClickListener { viewModel.onSearchClicked(activityFrame) }
 		
+		val recycler = binding.fragmentMainFeedRecycler
+		recycler.setHasFixedSize(true)
+		viewModel.feeds?.subscribe({ recycler.adapter = MainFeedAdapter(it) }, subscribeKey)
+		
+		viewModel.onCreateView(inflater, container, repository)
 		return binding.root
 	}
 	
-	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		super.onViewCreated(view, savedInstanceState)
-		viewModel.onViewCreated()
+	override fun onDestroyView() {
+		viewModel.feeds?.unsubscribe(subscribeKey)
+		viewModel.loadStatus?.unsubscribe(subscribeKey)
+		super.onDestroyView()
+	}
+	
+	override fun onDestroy() {
+		viewModel.onDestroy()
+		super.onDestroy()
 	}
 }

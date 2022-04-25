@@ -34,7 +34,7 @@ class Repository: RepositoryInterface {
 	 */
 	override fun getNews(
 		category: NewsCategories,
-		onSuccess: (ArticlesSet) -> Unit,
+		onSuccess: (ArticlesSet, NetworkErrorType?) -> Unit,
 		onError: (NetworkErrorType) -> Unit,
 		language: NewsLanguages,
 		country: String,
@@ -59,13 +59,13 @@ class Repository: RepositoryInterface {
 			realm.insertOrUpdateWithIndexing<RealmItemArticle>(
 				category.getKey(), checkedArticles, true
 			)
-			onSuccess(ArticlesSet(checkedArticles, null))
+			onSuccess(ArticlesSet(checkedArticles, null), null)
 		}
 		fun onDownloadFailed(errorType: NetworkErrorType) {
 			realm.copyIndexedFromRealm<RealmItemArticle>(category.getKey(),
 				{ offlineArticles ->
 					if (offlineArticles.isEmpty()) onError(errorType) else {
-						onSuccess(ArticlesSet(offlineArticles, errorType))
+						onSuccess(ArticlesSet(offlineArticles, errorType), errorType)
 					}
 				},
 				{ onError(errorType) }
