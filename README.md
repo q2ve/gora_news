@@ -44,3 +44,5 @@
 Работа с сетью через Retrofit, БД - Realm, обработка изображений - ~~Picasso~~ Glide. Также использованы kotlin-reflect, shimmer, recyclerViewPreloader.
 
 Время выполнения - 19 часов.
+
+По результатам выполнения был принят на работу.
